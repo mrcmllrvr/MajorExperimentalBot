@@ -66,7 +66,7 @@ with st.sidebar:
 import chromadb
 from chromadb.utils import embedding_functions
 
-CHROMA_DATA_PATH = 'major_travel_experimental/'
+CHROMA_DATA_PATH = 'chromadb_major_travel/'
 HYPO_COLLECTION_NAME = "hypothetical_embeddings"
 DOCS_COLLECTION_NAME = "document_embeddings"
 
