@@ -136,7 +136,6 @@ def get_relevant_question_context(query, limit = 10):
     metadatas = []
     for dist_lst, document_lst, meta_lst in list(zip(relevant_questions['distances'], relevant_questions['documents'], relevant_questions['metadatas'])):
         for dst, doc, meta in list(zip(dist_lst, document_lst, meta_lst)):
-            logger.info(f"{doc} - {mt['Filename']}--{mt['Section Name']} - dst")
             if dst <= distance_threshold:
                 questions.append(doc) 
                 metadatas.append(meta)
