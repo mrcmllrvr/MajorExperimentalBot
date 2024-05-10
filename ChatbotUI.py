@@ -217,7 +217,7 @@ import tiktoken
 def num_tokens_from_messages(messages):
     """Returns the number of tokens used by a list of messages."""
     try:
-        encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
+        encoding = tiktoken.encoding_for_model("gpt-4")
     except KeyError:
         encoding = tiktoken.get_encoding("cl100k_base")
 
@@ -300,7 +300,7 @@ if StreamlitUser:
                 # Get Response
                 response = OpenAIClient.chat.completions.create(
                     messages=messages,
-                    model="gpt-3.5-turbo",
+                    model="gpt-4",
                     temperature=0,
                     n=1,
                     seed = 82598,
@@ -337,7 +337,7 @@ if StreamlitUser:
                         )
                 context_enhanced_response = OpenAIClient.chat.completions.create(
                     messages=messages,
-                    model="gpt-3.5-turbo",
+                    model="gpt-4",
                     seed = 82598,
                     temperature=0,
                     n=1,
