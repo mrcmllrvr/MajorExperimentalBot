@@ -154,6 +154,8 @@ def get_relevant_question_context(query, limit = 25, include_document_in_retriev
     
         for docu_dst, doc_text, meta_text in list(zip(docu_context['distances'], docu_context['documents'], docu_context['metadatas'])):
             for dst, doc, meta in list(zip(docu_dst, doc_text, meta_text)):
+                os.write(1,b"\n\nSimilar Raw Documents:\n")
+                os.write(1,f"DISTANCE : {dst}\nCONTENT : {doc}".encode())
                 if dst <= 0.5:
                     questions.append(doc)
                     metadatas.append(meta)
