@@ -190,7 +190,7 @@ def get_relevant_question_context(query, limit = 10, include_document_in_retriev
         
         {context_data}
         """
-
+        os.write(1,"\n\n\n".join(reranked_documents).encode())
         os.write(1,f"Relevant Context\n\n{context_str}".encode())
         return context_str
         
