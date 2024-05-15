@@ -153,8 +153,8 @@ def get_relevant_question_context(query,
                     questions.append(doc) 
                     metadatas.append(meta)
                     
-                    os.write(1,b"Relevant Questions:\n")
-                    os.write(1,f"DISTANCE : {dst}\nCONTENT : {doc}".encode())
+                    #os.write(1,b"Relevant Questions:\n")
+                    #os.write(1,f"DISTANCE : {dst}\nCONTENT : {doc}".encode())
                 
     if include_document_in_retrieval:
         docu_context = document_collection.query(
@@ -165,14 +165,14 @@ def get_relevant_question_context(query,
     
         for docu_dst, doc_text, meta_text in list(zip(docu_context['distances'], docu_context['documents'], docu_context['metadatas'])):
             for dst, doc, meta in list(zip(docu_dst, doc_text, meta_text)):
-                os.write(1,b"\n\nSimilar Raw Documents:\n")
-                os.write(1,f"DISTANCE : {dst}\nCONTENT : {doc}".encode())
+                #os.write(1,b"\n\nSimilar Raw Documents:\n")
+                #os.write(1,f"DISTANCE : {dst}\nCONTENT : {doc}".encode())
                 if dst <= 0.8:
                     questions.append(doc)
                     metadatas.append(meta)
 
-                    os.write(1,b"\n\nRelevant Raw Documents:\n")
-                    os.write(1,f"DISTANCE : {dst}\nCONTENT : {doc}".encode())
+                    #os.write(1,b"\n\nRelevant Raw Documents:\n")
+                    #os.write(1,f"DISTANCE : {dst}\nCONTENT : {doc}".encode())
                     
     if questions:
         index2doc = {doc : i for i,doc in enumerate(questions)}
@@ -210,7 +210,7 @@ def get_relevant_question_context(query,
         
         {context_data}
         """
-        os.write(1,f"Relevant Context\n\n{context_str}".encode())
+        #os.write(1,f"Relevant Context\n\n{context_str}".encode())
         return context_str
         
     else:
