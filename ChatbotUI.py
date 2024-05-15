@@ -375,7 +375,8 @@ if StreamlitUser:
                 
                 if tool_calls:
                     available_fxns = {
-                        "get_relevant_question_context" : get_relevant_question_context
+                        "get_relevant_question_context" : get_relevant_question_context,
+                        "get_AYNTK_documents" : get_AYNTK_documents
                     }
                     
                     messages.append(response_message),
