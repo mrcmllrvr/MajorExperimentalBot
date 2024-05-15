@@ -125,14 +125,25 @@ OpenAIClient = openai.OpenAI(
 #### DEFINE FUNCTION CALLS ##############
 import cohere
 co = cohere.Client(COHERE_KEY)
-def get_relevant_question_context(query, limit = 25, include_document_in_retrieval = True):
-    relevant_questions = questions_collection.query(
-        query_texts = [query],
-        n_results = limit,
-        include=["documents","distances","metadatas"]
-    )
+def get_relevant_question_context(query, 
+                                  limit = 25, 
+                                  include_document_in_retrieval = True, 
+                                  priority_SOP = None):
+    if not priority_SOP:
+        relevant_questions = questions_collection.query(
+            query_texts = [query],
+            n_results = limit,
+            include=["documents","distances","metadatas"]
+        )
+    else:
+        relevant_questions = questions_collection.query(
+            query_texts = [query],
+            n_results = limit,
+            include=["documents","distances","metadatas"],
+            where = {'Filename': priority_SOP}
+        )
     
-    distance_threshold = 0.9
+    distance_threshold = 0.6
     questions = []
     metadatas = []
     for dist_lst, document_lst, meta_lst in list(zip(relevant_questions['distances'], relevant_questions['documents'], relevant_questions['metadatas'])):
@@ -156,7 +167,7 @@ def get_relevant_question_context(query, limit = 25, include_document_in_retriev
             for dst, doc, meta in list(zip(docu_dst, doc_text, meta_text)):
                 os.write(1,b"\n\nSimilar Raw Documents:\n")
                 os.write(1,f"DISTANCE : {dst}\nCONTENT : {doc}".encode())
-                if dst <= 0.5:
+                if dst <= 0.8:
                     questions.append(doc)
                     metadatas.append(meta)
 
@@ -228,7 +239,33 @@ SIGNATURE_get_relevant_question_context = {
     
 }
 
-tools = [SIGNATURE_get_relevant_question_context]
+def get_AYNTK_documents(query, limit = 25, include_document_in_retrieval = True, priority_SOP = "AYNTK"):
+    return get_relevant_question_context(query, limit = 25, include_document_in_retrieval = True, priority_SOP = "AYNTK")
+    
+SIGNATURE_get_AYNTK_context = {
+    "type" : "function",
+    "function" : {
+        "name" : "get_AYNTK_documents",
+        "description" : "First function to use if in need of context to answer a query. Finds answers within the AYNTK document.",
+        "parameters" : {
+            "type" : "object",
+            "properties" : {
+                "query" : {
+                    "type" : "string",
+                    "description" : "Query passed by the user to the chatbot"
+                },
+                "limit" : {
+                    "type" : "integer",
+                    "description" : "Total number of SOPs to retrieve from vector database"
+                }
+            },
+            "required" : ["query"],
+        }
+    }
+    
+}
+
+tools = [SIGNATURE_get_relevant_question_context, SIGNATURE_get_AYNTK_context]
 
 #######################################
 
