@@ -131,7 +131,7 @@ def get_relevant_question_context(query, limit = 10, include_document_in_retriev
         include=["documents","distances","metadatas"]
     )
     
-    distance_threshold = 0.6
+    distance_threshold = 0.9
     questions = []
     metadatas = []
     for dist_lst, document_lst, meta_lst in list(zip(relevant_questions['distances'], relevant_questions['documents'], relevant_questions['metadatas'])):
@@ -149,7 +149,7 @@ def get_relevant_question_context(query, limit = 10, include_document_in_retriev
     
         for docu_dst, doc_text, meta_text in list(zip(docu_context['distances'], docu_context['documents'], docu_context['metadatas'])):
             for dst, doc, meta in list(zip(docu_dst, doc_text, meta_text)):
-                if dst <= 0.3:
+                if dst <= 0.45:
                     questions.append(doc)
                     metadatas.append(meta)
                     
@@ -262,8 +262,8 @@ Retrictions:
 3. Avoid mentioning everything any information irrelevant to your coworkers' questions - try to be concise while remaining informative.
 
 Guidelines for responses:
-1. In the case that the question provided to you was too vague, ask clarifying questions.
-2. If you think you have a similar context to the question - even if not exact - ask if thats what they meant. 
+1. In the case that the prompt was too vague, ask clarifying questions.
+2. If you think you have a similar context to the prompt - even if not exactly the same - ask if thats what they meant. 
 3. If no similar context was found from your initial search, ask clarifying questions that would help you answer them better or help you identify what to look for.
 4. If you still dont know the answer, respond by saying that you were unable to find a good answer but inform them which SOP document you found most similar.
 5. In the instance that the question is incomprehensible, respond accordingly by saying that you only have knowledge about the SOPs.
