@@ -124,7 +124,7 @@ OpenAIClient = openai.OpenAI(
 #### DEFINE FUNCTION CALLS ##############
 import cohere
 co = cohere.Client(COHERE_KEY)
-def get_relevant_question_context(query, limit = 10):
+def get_relevant_question_context(query, limit = 10, include_document_in_retrieval = False):
     relevant_questions = questions_collection.query(
         query_texts = [query],
         n_results = limit,
@@ -139,7 +139,19 @@ def get_relevant_question_context(query, limit = 10):
             if dst <= distance_threshold:
                 questions.append(doc) 
                 metadatas.append(meta)
-        
+                
+    if include_document_in_retrieval:
+        docu_context = document_collection.query(
+            query_texts = [query],
+            n_results = limit,
+            include=["documents","distances","metadatas"]
+        )
+    
+        for docu_dst, doc_text, meta_text in list(zip(docu_context['distances'], docu_context['documents'], docu_context['metadatas'])):
+            for dst, doc, meta in list(zip(docu_dst, doc_text, meta_text)):
+                if dst <= 0.3:
+                    questions.append(doc)
+                    metadatas.append(meta)
                     
     if questions:
         index2doc = {doc : i for i,doc in enumerate(questions)}
