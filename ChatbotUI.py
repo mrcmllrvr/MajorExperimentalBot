@@ -137,6 +137,8 @@ def get_relevant_question_context(query, limit = 10, include_document_in_retriev
     metadatas = []
     for dist_lst, document_lst, meta_lst in list(zip(relevant_questions['distances'], relevant_questions['documents'], relevant_questions['metadatas'])):
         for dst, doc, meta in list(zip(dist_lst, document_lst, meta_lst)):
+            os.write(1,b"Relevant Documents:")
+            os.write(1,f"DISTANCE : {dst}\nCONTENT : {doc}".encode())
             if dst <= distance_threshold:
                 questions.append(doc) 
                 metadatas.append(meta)
@@ -190,7 +192,6 @@ def get_relevant_question_context(query, limit = 10, include_document_in_retriev
         
         {context_data}
         """
-        os.write(1,"\n\n\n".join(reranked_documents).encode())
         os.write(1,f"Relevant Context\n\n{context_str}".encode())
         return context_str
         
