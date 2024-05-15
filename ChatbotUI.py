@@ -137,12 +137,13 @@ def get_relevant_question_context(query, limit = 25, include_document_in_retriev
     metadatas = []
     for dist_lst, document_lst, meta_lst in list(zip(relevant_questions['distances'], relevant_questions['documents'], relevant_questions['metadatas'])):
         for dst, doc, meta in list(zip(dist_lst, document_lst, meta_lst)):
-            os.write(1,b"Relevant Documents:")
-            os.write(1,f"DISTANCE : {dst}\nCONTENT : {doc}".encode())
             if dst <= distance_threshold:
                 if doc not in questions:
                     questions.append(doc) 
                     metadatas.append(meta)
+                    
+                    os.write(1,b"Relevant Questions:\n")
+                    os.write(1,f"DISTANCE : {dst}\nCONTENT : {doc}".encode())
                 
     if include_document_in_retrieval:
         docu_context = document_collection.query(
@@ -156,6 +157,9 @@ def get_relevant_question_context(query, limit = 25, include_document_in_retriev
                 if dst <= 0.5:
                     questions.append(doc)
                     metadatas.append(meta)
+
+                    os.write(1,b"\n\nRelevant Raw Documents:\n")
+                    os.write(1,f"DISTANCE : {dst}\nCONTENT : {doc}".encode())
                     
     if questions:
         index2doc = {doc : i for i,doc in enumerate(questions)}
