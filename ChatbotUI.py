@@ -2,6 +2,7 @@ __import__('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
+import os
 import streamlit as st
 import openai
 import json
@@ -188,9 +189,9 @@ def get_relevant_question_context(query, limit = 10, include_document_in_retriev
         You may use the following SOP Documents to answer the question:
         
         {context_data}
-
-        If multiple possible answers are found, ask clarifying questions to the user.
         """
+
+        os.write(1,f"Relevant Context\n\n{context_str}".encode())
         return context_str
         
     else:
