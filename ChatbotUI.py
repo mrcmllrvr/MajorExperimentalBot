@@ -126,7 +126,7 @@ OpenAIClient = openai.OpenAI(
 import cohere
 co = cohere.Client(COHERE_KEY)
 def get_relevant_question_context(query, 
-                                  limit = 25, 
+                                  limit = 15, 
                                   include_document_in_retrieval = True, 
                                   priority_SOP = None):
     if not priority_SOP:
@@ -239,8 +239,8 @@ SIGNATURE_get_relevant_question_context = {
     
 }
 
-def get_AYNTK_documents(query, limit = 25, include_document_in_retrieval = True, priority_SOP = "AYNTK"):
-    return get_relevant_question_context(query, limit = 25, include_document_in_retrieval = True, priority_SOP = "AYNTK")
+def get_AYNTK_documents(query, limit = 15, include_document_in_retrieval = True, priority_SOP = "AYNTK"):
+    return get_relevant_question_context(query, limit = 15, include_document_in_retrieval = True, priority_SOP = "AYNTK")
     
 SIGNATURE_get_AYNTK_context = {
     "type" : "function",
@@ -300,7 +300,8 @@ Role : As a travel agent assistant for Major Travel, your role involves strictly
 Response Rules:
 1. Utilize the provided context given to you in identifying which SOP is relevant to their query through document retrieval. 
 2. Respond in a friendly and professional tone - much like a travel agent or bank assistant giving answers to questions asked of them.
-3. If you deem necessary, try interpreting questions by making them less vague. Take for example an instance where the use of "who do we use" can also be understood as "Who does Major Travel use".
+3. If need be, perform multiple function calls to answer the question
+4. If you deem necessary, try interpreting questions by making them less vague. Take for example an instance where the use of "who do we use" can also be understood as "Who does Major Travel use".
 
 Retrictions:
 1. Answer only with facts extracted from the context provided to you. Do not generate answers that don't use the sources provided to you.
@@ -313,6 +314,7 @@ Guidelines for responses:
 3. If no similar context was found from your initial search, ask clarifying questions that would help you answer them better or help you identify what to look for.
 4. If you still dont know the answer, respond by saying that you were unable to find a good answer but inform them which SOP document you found most similar.
 5. In the instance that the question is incomprehensible, respond accordingly by saying that you only have knowledge about the SOPs.
+6. If doing function calls, run get_AYNTK_documents first to check for relevant context. If no relevant context is found within AYNTK, thats the only time you can run get_relevant_question_context
 
 Response Template:
 <start of template>
