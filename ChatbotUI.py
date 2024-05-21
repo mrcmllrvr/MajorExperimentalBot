@@ -78,8 +78,11 @@ st.markdown("""
         /* Custom CSS for the text color */
         .custom-text {
             color: white !important;
-            margin-top: 20px;  /* Add space above the text */
+            margin-top: 30px;  /* Add space above the text */
             margin-bottom: 5px;  /* Reduce space below the text */
+        }
+        .custom-input-container {
+            margin-top: -10px;  /* Reduce space above the input field */
         }
     </style>
     """, unsafe_allow_html=True)
