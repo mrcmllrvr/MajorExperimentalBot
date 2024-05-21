@@ -82,7 +82,7 @@ st.markdown("""
             margin-bottom: 5px;  /* Reduce space below the text */
         }
         .custom-input-container {
-            margin-top: -10px;  /* Reduce space above the input field */
+            margin-top: -30px;  /* Reduce space above the input field */
         }
     </style>
     """, unsafe_allow_html=True)
