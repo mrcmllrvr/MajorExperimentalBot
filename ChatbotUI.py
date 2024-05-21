@@ -75,16 +75,18 @@ st.markdown("""
             margin-left: auto;
             margin-right: auto;
         }
-        /* Custom CSS for placeholder text color */
-        ::placeholder {
-            color: #FFFFFF;
+        /* Custom CSS for the text color */
+        .custom-text {
+            color: white !important;
         }
     </style>
     """, unsafe_allow_html=True)
 
 with st.sidebar:
     st.image("major-white.png", use_column_width=True)
-    StreamlitUser = st.text_input("Hi! May I know who is utilizing the tool?", key="StreamlitUser")
+    st.markdown('<p class="custom-text">Hi! May I know who is utilizing the tool?</p>', unsafe_allow_html=True)
+    StreamlitUser = st.text_input("", key="StreamlitUser")
+
     
 ##### CONNECT TO DATABASE and OpenAI #####
 import chromadb
