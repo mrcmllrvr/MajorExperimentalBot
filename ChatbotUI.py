@@ -84,6 +84,14 @@ st.markdown("""
         .custom-input-container {
             margin-top: -30px;  /* Reduce space above the input field */
         }
+        .custom-warning-box {
+            background-color: #FFA200;  /* Change this to your desired color */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            color: white !important;
+        }
     </style>
     """, unsafe_allow_html=True)
 
@@ -379,7 +387,7 @@ if StreamlitUser:
     while num_tokens_from_messages(messages) >= 8192*0.8:
         messages.pop(0)
         
-    if prompt := st.chat_input(placeholder="What do you want to know about Major Travel's SOPs"):
+    if prompt := st.chat_input(placeholder="What would you like to know?"):
         
         with st.chat_message("user"):
             st.markdown(prompt)
@@ -461,4 +469,4 @@ if StreamlitUser:
                 
             st.toast("Feedback recorded!", icon="📝")
 else:
-    st.warning("Please input name on the sidebar first prior to proceeding with the UAT")
+    st.markdown('<div class="custom-warning-box">Please input name on the sidebar first prior to proceeding with the UAT</div>', unsafe_allow_html=True)
