@@ -60,7 +60,7 @@ logger = logging.getLogger(f"MajorTravelUAT")
 COHERE_KEY = st.secrets['COHERE_KEY']
 openai_api_key = st.secrets['OPENAI_API_KEY']
 
-with st.sidebar:
+
     # New elements for sidebar UI
     st.markdown("""
     <style>
@@ -78,8 +78,9 @@ with st.sidebar:
     </style>
     """, unsafe_allow_html=True)
 
+with st.sidebar:
     # Sidebar content using HTML for image
-    st.markdown('<img src="major-white.png" class="sidebar-img">', unsafe_allow_html=True)
+    st.sidebar.image("major-white.png", use_column_width=True)
     StreamlitUser = st.text_input("Hi! May I know who is utilizing the tool?", key="StreamlitUser")
     
 ##### CONNECT TO DATABASE and OpenAI #####
