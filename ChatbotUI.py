@@ -65,7 +65,7 @@ openai_api_key = st.secrets['OPENAI_API_KEY']
 st.markdown("""
     <style>
         [data-testid=stSidebar] {
-            background-color: #CF287A;
+            background-color: #F43B95;
         }
         .sidebar-img {
             width: 50%;
@@ -75,19 +75,14 @@ st.markdown("""
             margin-left: auto;
             margin-right: auto;
         }
-        /* Custom CSS for input text color */
-        input {
-            color: white !important;
-        }
         /* Custom CSS for placeholder text color */
         ::placeholder {
-            color: white !important;
+            color: #FFFFFF;
         }
     </style>
     """, unsafe_allow_html=True)
 
 with st.sidebar:
-    # Sidebar content using HTML for image
     st.image("major-white.png", use_column_width=True)
     StreamlitUser = st.text_input("Hi! May I know who is utilizing the tool?", key="StreamlitUser")
     
