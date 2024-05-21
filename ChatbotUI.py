@@ -353,7 +353,7 @@ Relevant Context found in {CONTEXT_SOURCE_FILE}\n
 </end of template>
 """
 ########################################
-st.title("📝 Major Travel Chatbot UAT Platform")
+st.title("📝 Major Travel Chatbot UAT")
 if StreamlitUser:
 
     if "messages" not in st.session_state:
