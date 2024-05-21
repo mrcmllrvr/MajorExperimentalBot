@@ -86,7 +86,7 @@ st.markdown("""
         }
         .custom-warning-box {
             background-color: #164295;  /* Change this to your desired color */
-            padding: 20px;
+            padding: 10px;
             border-radius: 10px;
             margin-top: 20px;
             text-align: center;
