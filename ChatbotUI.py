@@ -75,12 +75,20 @@ st.markdown("""
             margin-left: auto;
             margin-right: auto;
         }
+        /* Custom CSS for input text color */
+        input {
+            color: white !important;
+        }
+        /* Custom CSS for placeholder text color */
+        ::placeholder {
+            color: white !important;
+        }
     </style>
     """, unsafe_allow_html=True)
 
 with st.sidebar:
     # Sidebar content using HTML for image
-    st.sidebar.image("major-white.png", use_column_width=True)
+    st.image("major-white.png", use_column_width=True)
     StreamlitUser = st.text_input("Hi! May I know who is utilizing the tool?", key="StreamlitUser")
     
 ##### CONNECT TO DATABASE and OpenAI #####
