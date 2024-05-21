@@ -61,6 +61,25 @@ COHERE_KEY = st.secrets['COHERE_KEY']
 openai_api_key = st.secrets['OPENAI_API_KEY']
 
 with st.sidebar:
+    # New elements for sidebar UI
+    st.markdown("""
+    <style>
+        [data-testid=stSidebar] {
+            background-color: #CF287A;
+        }
+        .sidebar-img {
+            width: 50%;
+            height: auto;  /* Maintain aspect ratio */
+            max-width: 150px;  /* Set a max width for the images */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # Sidebar content
+    st.image("major-white.png", use_column_width=True, className="sidebar-img")
     StreamlitUser = st.text_input("Hi! May I know who is utilizing the tool?", key="StreamlitUser")
     
 ##### CONNECT TO DATABASE and OpenAI #####
