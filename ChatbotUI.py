@@ -65,7 +65,7 @@ openai_api_key = st.secrets['OPENAI_API_KEY']
 st.markdown("""
     <style>
         [data-testid=stSidebar] {
-            background-color: #F43B95;
+            background-color: #CF287A;
         }
         .sidebar-img {
             width: 50%;
@@ -78,6 +78,8 @@ st.markdown("""
         /* Custom CSS for the text color */
         .custom-text {
             color: white !important;
+            margin-top: 20px;  /* Add space above the text */
+            margin-bottom: 5px;  /* Reduce space below the text */
         }
     </style>
     """, unsafe_allow_html=True)
