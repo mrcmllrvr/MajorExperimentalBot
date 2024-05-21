@@ -61,8 +61,8 @@ COHERE_KEY = st.secrets['COHERE_KEY']
 openai_api_key = st.secrets['OPENAI_API_KEY']
 
 
-    # New elements for sidebar UI
-    st.markdown("""
+# New elements for sidebar UI
+st.markdown("""
     <style>
         [data-testid=stSidebar] {
             background-color: #CF287A;
