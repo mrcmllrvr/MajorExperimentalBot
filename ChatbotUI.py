@@ -85,7 +85,7 @@ st.markdown("""
             margin-top: -30px;  /* Reduce space above the input field */
         }
         .custom-warning-box {
-            background-color: #FFA200;  /* Change this to your desired color */
+            background-color: #164295;  /* Change this to your desired color */
             padding: 20px;
             border-radius: 10px;
             margin-top: 20px;
