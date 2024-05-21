@@ -78,8 +78,8 @@ with st.sidebar:
     </style>
     """, unsafe_allow_html=True)
 
-    # Sidebar content
-    st.image("major-white.png", use_column_width=True, className="sidebar-img")
+    # Sidebar content using HTML for image
+    st.markdown('<img src="major-white.png" class="sidebar-img">', unsafe_allow_html=True)
     StreamlitUser = st.text_input("Hi! May I know who is utilizing the tool?", key="StreamlitUser")
     
 ##### CONNECT TO DATABASE and OpenAI #####
